@@ -28,7 +28,7 @@ int main()
 	 vector< pair<long int,long int> > v;
 
 
-     for(i = 1;i <= q;i++)
+     for(i = 0;i < q;i++)
     {
     
         cin>>l>>u>>x;
