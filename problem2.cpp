@@ -1,38 +1,58 @@
 #include<bits/stdc++.h>
 
 using namespace std;
+long fnmax(long a,long b)
+{
+    if(a>b)
+    {
+        return a;
+    }
+    else
+    {
+        return b;
+    }
+}
+
 int main()
 {
-    vector<int> v;
-    int q,i,j,n;
-    cin>>n;
-    cin>>q;
-    long l,u,x;
-    
-    for(i=0;i<n;i++)
+     long int n,q;
+     long int r,l,u,x,t;
+     long int i;
+     t=0;
+     
+     cin>>n>>q;
+      r=n;  //minimum max value i.e the last element
+     
+	 
+ 
+	 vector< pair<long int,long int> > v;
+
+
+     for(i = 1;i <= q;i++)
     {
-        v.push_back(0);
-    }
     
-    for(i=0;i<q;i++)
-    {
         cin>>l>>u>>x;
-        v[l-1]+=x;
-        if(u<n)
-        {
-        v[u]-=x;
-        }
-    }
-    for(i=0;i<v.size();i++)
-    {
-        v[i+1]+=v[i];
+
+ 
+        v.push_back(make_pair(l-1,x));
+        v.push_back(make_pair(u,-x));
         
     }
-    for(i=0;i<v.size();i++)
+    sort(v.begin(),v.end());
+    
+    for(i = 0;i < v.size();i++)
     {
-        v[i]+=i+1;
-    }
-    long max=*max_element(v.begin(),v.end());
-    cout<<max;
-    return 0;
+    	
+    	if(v[i].second<0)  //elements next to upper bound as we are considering index
+    	{
+    	    r=fnmax(t+v[i].first,r);
+    	    t+=v[i].second;
+    	}
+    	else{
+    	    t+=v[i].second;
+    	}
+	}
+	cout<<r;
+
+   return 0;
 }
